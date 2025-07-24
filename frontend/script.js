@@ -142,7 +142,7 @@ chatForm.addEventListener('submit', async function(e) {
     showTyping();
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/ask_ai", {
+        const response = await fetch("https://genie-bot-8otu.onrender.com", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
