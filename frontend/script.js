@@ -22,7 +22,7 @@ function playGenieSound() {
 }
 function shakeLamp() {
     lampImg.classList.add('shaking');
-    setTimeout(()=>lampImg.classList.remove('shaking'), 500);
+    setTimeout(() => lampImg.classList.remove('shaking'), 500);
 }
 
 // Citation removal & rendering logic unchanged...
@@ -36,7 +36,7 @@ function appendMessage(content, sender = 'bot', time = null) {
     chatHistory.push({
         sender,
         content: htmlContent,
-        time: time || (new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}))
+        time: time || (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }))
     });
     const row = document.createElement('div');
     row.classList.add('message-row', sender === 'bot' ? 'bot-row' : 'user-row');
@@ -48,7 +48,7 @@ function appendMessage(content, sender = 'bot', time = null) {
     bubble.innerHTML = htmlContent;
     const stamp = document.createElement('div');
     stamp.className = "time-stamp";
-    stamp.textContent = time || (new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+    stamp.textContent = time || (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
     if (sender === 'bot') {
         row.appendChild(avatar); row.appendChild(bubble); row.appendChild(stamp);
     } else {
@@ -125,15 +125,16 @@ window.onload = () => {
         playGenieSound();
     });
 };
+
 window.quickReply = (text) => {
     chatInput.value = text;
-    chatForm.dispatchEvent(new Event('submit', {cancelable:true, bubbles:true}));
+    chatForm.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
 };
 
 function showTyping() { typingIndicator.style.display = 'flex'; }
 function hideTyping() { typingIndicator.style.display = 'none'; }
 
-chatForm.addEventListener('submit', async function(e) {
+chatForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const msg = chatInput.value.trim();
     if (!msg) return;
@@ -142,9 +143,9 @@ chatForm.addEventListener('submit', async function(e) {
     showTyping();
 
     try {
-        const response = await fetch("https://genie-bot-8otu.onrender.com/ask", {
+        const response = await fetch("https://genie-bot-8otu.onrender.com/ask_ai", {
             method: "POST",
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 prompt: msg,
                 company_name: "TestCompany"
